@@ -25,10 +25,21 @@ public class MouseLook : MonoBehaviour {
 		Rigidbody body = GetComponent<Rigidbody> ();
 		if (body != null)
 			body.freezeRotation = true;
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKey ("escape")) {
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
+		}
+		if (Input.GetMouseButtonDown (0)) {
+			Cursor.visible = false;
+			Cursor.lockState = CursorLockMode.Locked;
+		}
+
 		if (axes == RotationAxes.MouseX) {
 			transform.Rotate (0, Input.GetAxis("Mouse X") * sensitivityHor, 0);
 		} else if (axes == RotationAxes.MouseY) {
